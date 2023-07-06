@@ -24,7 +24,7 @@ def SMA(close, timeframe):
 def SMAplot(type, name):
     #function that plots the simple moving average for timeframes 10, 20, 50, 200
     #it must read the desired file, analyse the data and plot the SMAs
-    str = os.path.join("Dataset", type, name + ".us.txt")
+    str = os.path.join("Data", type + 's', name + ".us.txt")
     data = pd.read_csv(str)
     date_array  = pd.to_datetime(data['Date'])
     close_array = data['Close']
@@ -93,7 +93,7 @@ def correlation(startingDate, listOfStocks = [], endingDate = '2017-11-10'):
     #read data from the specified stocks
     if(len(listOfStocks) != 0 ):
         for s in listOfStocks:
-            st = os.path.join("Dataset", 'Stock', s + ".us.txt")
+            st = os.path.join("Data", 'Stocks', s + ".us.txt")
             data = pd.read_csv(st)
             if start in data['Date'].values and end in data['Date'].values:
                     data = data[data['Date'] >= startingDate]
@@ -107,7 +107,7 @@ def correlation(startingDate, listOfStocks = [], endingDate = '2017-11-10'):
 
     #read whole database of stocks
     else:
-        for child in Path('Dataset\Stock').iterdir():
+        for child in Path('Data\Stocks').iterdir():
             if child.is_file():
                 name = str(child)[14:-7]    
                 st = os.path.join(child)
@@ -155,7 +155,7 @@ def correlation(startingDate, listOfStocks = [], endingDate = '2017-11-10'):
 
 def regression(name, train_size):
     # Read the stock data from the file
-    filepath = f"Dataset/Stock/{name}.us.txt"
+    filepath = f"Data/Stocks/{name}.us.txt"
     stock = pd.read_csv(filepath)
     stock['Date'] = pd.to_datetime(stock['Date'])
 
